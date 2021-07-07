@@ -28,6 +28,9 @@
 # Ignore dotenv overrides
 /.env
 
+# Ignore local vscode settings
+/.vscode
+
 /public/packs
 /public/packs-test
 /node_modules
