@@ -20,7 +20,8 @@ class BaseService
   end
 
   def invalid(model, result)
-    record = model.new(result.to_h)
+    record = model.is_a?(ApplicationRecord) ? model : model.new
+    record.attributes = result.to_h
     record.add_errors(result.errors)
     record
   end

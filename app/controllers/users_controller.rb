@@ -36,8 +36,13 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1 or /users/1.json
   def update
+    @user = User::UpdateUser.new(
+      target: @user,
+      actor: nil # current_user
+    ).call(params: params.require(:user))
+
     respond_to do |format|
-      if @user.update(user_params)
+      if @user.errors.empty?
         format.html { redirect_to @user, flash: { success: 'User was successfully updated.' } }
         format.json { render :show, status: :ok, location: @user }
       else
