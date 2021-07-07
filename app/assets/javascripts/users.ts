@@ -1,10 +1,14 @@
 import TomSelect from 'tom-select/dist/esm/tom-select';
 
 function onLoad() {
-  new TomSelect('#user_country_code', {
-    allowEmptyOption: true,
-    create: false
-  });
+  const countrySelect = document.querySelector('body.users #user_country_code');
+
+  if (countrySelect) {
+    new TomSelect(countrySelect, {
+      allowEmptyOption: true,
+      create: false
+    });
+  }
 }
 
 export default function init() {
