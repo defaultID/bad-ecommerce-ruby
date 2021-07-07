@@ -7,4 +7,12 @@ class User < ApplicationRecord
   def password=(new_password)
     self[:encrypted_password] = Digest::MD5.hexdigest(new_password)
   end
+
+  def country_name
+    ISO3166::Country.new(country_code)&.name
+  end
+
+  def display_name
+    full_name || email
+  end
 end

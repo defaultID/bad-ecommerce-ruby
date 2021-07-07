@@ -10,4 +10,6 @@ html
     = javascript_pack_tag 'application'
   body[id="page-#{controller.controller_name}-#{controller.action_name}" class=controller.controller_name]
     = render partial: 'layouts/navbar'
+    = render partial: 'layouts/flash'
+
     = yield

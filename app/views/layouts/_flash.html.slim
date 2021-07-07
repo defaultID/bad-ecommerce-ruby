@@ -1,0 +1,4 @@
+.container
+  - flash.each do |type, message|
+    .alert[ class = alert_class_for(type) ]
+      = message

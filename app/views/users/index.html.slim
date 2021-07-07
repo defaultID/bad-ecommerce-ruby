@@ -1,19 +1,26 @@
-h1 Listing users
+.container
+  h1 Listing users
 
-table
-  thead
-    tr
-      th
-      th
-      th
-
-  tbody
-    - @users.each do |user|
+  table.table.table-striped
+    thead
       tr
-        td = link_to 'Show', user
-        td = link_to 'Edit', edit_user_path(user)
-        td = link_to 'Destroy', user, data: { confirm: 'Are you sure?' }, method: :delete
+        th[ scope = "col" ] Email
+        th[ scope = "col" ] Name
+        th[ scope = "col" ] Country
+        th[ scope = "col" ] Registered at
+        th[ scope = "col" ] Actions
 
-br
+    tbody
+      - @users.each do |user|
+        tr
+          td = link_to user.email, user
+          td = link_to user.full_name, user
+          td = user.country_name
+          td = l user.created_at
+          td
+            => link_to 'Edit', edit_user_path(user)
+            => link_to 'Destroy', user, data: { confirm: 'Are you sure?' }, method: :delete
 
-= link_to 'New User', new_user_path
+  br
+
+  = link_to 'New User', new_user_path

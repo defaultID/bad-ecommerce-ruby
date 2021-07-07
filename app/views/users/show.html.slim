@@ -1,6 +1,27 @@
-p#notice = notice
+.container
+  h1 User profile for #{@user.display_name}
 
+  table.table.table-striped
+    tbody
+      tr
+        th[ scope = "row" ] Email
+        td = @user.email
+      tr
+        th[ scope = "row" ] Name
+        td = @user.full_name
+      tr
+        th[ scope = "row" ] Country
+        td = @user.country_name
+      tr
+        th[ scope = "row" ] City
+        td = @user.city
+      tr
+        th[ scope = "row" ] Address
+        td = @user.address
+      tr
+        th[ scope = "row" ] Registered at
+        td = l @user.created_at
 
-=> link_to 'Edit', edit_user_path(@user)
-'|
-=< link_to 'Back', users_path
+  => link_to 'Edit', edit_user_path(@user)
+  '|
+  =< link_to 'Back', users_path
