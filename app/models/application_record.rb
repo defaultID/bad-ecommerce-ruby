@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
 
@@ -5,7 +7,7 @@ class ApplicationRecord < ActiveRecord::Base
     Rails.logger.debug dry_errors.inspect
 
     dry_errors.each do |error|
-      self.errors.add error.path.first, error.text
+      errors.add error.path.first, error.text
     end
   end
 end

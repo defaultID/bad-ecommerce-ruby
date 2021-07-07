@@ -1,25 +1,28 @@
-class User::CreateUser < BaseService
-  private
+# frozen_string_literal: true
 
-  def _call(params:)
-    result = validate(params.permit!.to_h)
+class User
+  class CreateUser < BaseService
+    private
 
-    user =  if result.success?
-              persist result
-            else
-              invalid User, result
-            end
-    user
-  end
+    def _call(params:)
+      result = validate(params.permit!.to_h)
 
-  def validate(params)
-    User::NewUserContract.new.(params)
-  end
+      if result.success?
+        persist result
+      else
+        invalid User, result
+      end
+    end
 
-  def persist(result)
-    result = result.to_h
-    result[:api_token] = SecureRandom.hex(16)
+    def validate(params)
+      User::NewUserContract.new.call(params)
+    end
 
-    User.create! result
+    def persist(result)
+      result = result.to_h
+      result[:api_token] = SecureRandom.hex(16)
+
+      User.create! result
+    end
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BaseService
   extend Dry::Initializer
 
@@ -14,7 +16,7 @@ class BaseService
   private
 
   def _call(**args)
-    raise NotImplementedError
+    fail NotImplementedError
   end
 
   def invalid(model, result)

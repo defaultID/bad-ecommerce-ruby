@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 #
 # Uncomment this and change the path if necessary to include your own
 # components.
@@ -14,7 +15,9 @@ SimpleForm.setup do |config|
   # stack. The options given below are used to wrap the
   # whole input.
   config.wrappers :default, class: :input,
-    hint_class: :field_with_hint, error_class: :field_with_errors, valid_class: :field_without_errors do |b|
+                            hint_class: :field_with_hint,
+                            error_class: :field_with_errors,
+                            valid_class: :field_without_errors do |b|
     ## Extensions enabled by default
     # Any of these extensions can be disabled for a
     # given input by passing: `f.input EXTENSION_NAME => false`.
@@ -23,7 +26,7 @@ SimpleForm.setup do |config|
 
     # Determines whether to use HTML5 (:email, :url, ...)
     # and required attributes
-    b.use :html5
+    b.use :html5 # rubocop:disable Naming/VariableNumber
 
     # Calculates placeholders automatically from I18n
     # You can also pass a string as f.input placeholder: "Placeholder"
