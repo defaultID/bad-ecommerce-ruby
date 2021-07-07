@@ -918,6 +918,11 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
+"@orchidjs/sifter@^0.7.4":
+  version "0.7.4"
+  resolved "https://registry.yarnpkg.com/@orchidjs/sifter/-/sifter-0.7.4.tgz#0bc5362f215be6958f4d7926f7c3b9b287e65cf4"
+  integrity sha512-DGAw6y7z+05zPpMd/lkl6ukoQlh28+dOPi8N+fXjQwwefG9ZeZFUHxmUkG7NnHQbU9uF2H1cBw5KmugaSs0NLA==
+
 "@rails/ujs@^6.0.0":
   version "6.1.4"
   resolved "https://registry.yarnpkg.com/@rails/ujs/-/ujs-6.1.4.tgz#093d5341595a02089ed309dec40f3c37da7b1b10"
@@ -6420,6 +6425,13 @@ toidentifier@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/toidentifier/-/toidentifier-1.0.0.tgz#7e1be3470f1e77948bc43d94a3c8f4d7752ba553"
   integrity sha512-yaOH/Pk/VEhBWWTlhI+qXxDFXlejDGcQipMlyxda9nthulaxLZUNcUqFxokp0vcYnvteJln5FNQDRrxj3YcbVw==
+
+tom-select@^1.7.6:
+  version "1.7.6"
+  resolved "https://registry.yarnpkg.com/tom-select/-/tom-select-1.7.6.tgz#6deb4310cca8adfd5fc3d3483b0fe122de52c515"
+  integrity sha512-nG8oVk763ke+oVtsqTxAdbxwIjzo2MbmdZBRAsjkE2j5FWzPcpBry4Lkq1+UnnwoSamrmJ4lM530tA5fxFl6ZQ==
+  dependencies:
+    "@orchidjs/sifter" "^0.7.4"
 
 ts-pnp@^1.1.6:
   version "1.2.0"

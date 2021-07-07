@@ -1,2 +1,6 @@
 @import '../stylesheets/bootstrap.scss';
+@import '~tom-select/src/scss/tom-select.bootstrap5.scss';
+
+// Individual stylesheets
+@import '../stylesheets/forms.scss';
 @import '../stylesheets/welcome.scss';

@@ -1,0 +1,25 @@
+class BaseService
+  extend Dry::Initializer
+
+  class << self
+    def instance(**args)
+      @instance ||= new(**args)
+    end
+  end
+
+  def call(**args)
+    args.empty? ? _call : _call(**args)
+  end
+
+  private
+
+  def _call(**args)
+    raise NotImplementedError
+  end
+
+  def invalid(model, result)
+    record = model.new(result.to_h)
+    record.add_errors(result.errors)
+    record
+  end
+end

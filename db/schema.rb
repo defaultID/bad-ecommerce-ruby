@@ -10,6 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2021_07_06_202614) do
+
+  create_table "users", charset: "utf8mb4", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "email", null: false
+    t.string "encrypted_password", limit: 128, null: false
+    t.string "api_token", limit: 128, null: false
+    t.string "full_name"
+    t.string "address"
+    t.string "city"
+    t.string "country_code", limit: 2
+    t.index ["api_token"], name: "index_users_on_api_token"
+    t.index ["email"], name: "index_users_on_email", unique: true
+  end
 
 end

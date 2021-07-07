@@ -1,0 +1,13 @@
+doctype html
+html
+  head
+    title
+      | Badapp
+    meta[name="viewport" content="width=device-width,initial-scale=1"]
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_pack_tag 'application', media: 'all'
+    = javascript_pack_tag 'application'
+  body[id="page-#{controller.controller_name}-#{controller.action_name}" class=controller.controller_name]
+    = render partial: 'layouts/navbar'
+    = yield
