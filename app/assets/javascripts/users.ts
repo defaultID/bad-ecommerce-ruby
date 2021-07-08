@@ -12,6 +12,4 @@ function onLoad() {
   }
 }
 
-export default function init() {
-  document.addEventListener('DOMContentLoaded', onLoad, false);
-}
+document.addEventListener('DOMContentLoaded', onLoad, false);

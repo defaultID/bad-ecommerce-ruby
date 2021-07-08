@@ -4,7 +4,9 @@
 // that code so it'll be compiled.
 
 import Rails from '@rails/ujs';
-import initUsers from '../javascripts/users.ts';
+import 'bootstrap/js/src/dropdown';
+import 'bootstrap/js/src/collapse';
+
+import '../javascripts/users.ts';
 
 Rails.start();
-initUsers();

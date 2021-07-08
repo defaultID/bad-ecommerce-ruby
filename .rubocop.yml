@@ -68,7 +68,7 @@ Style/RegexpLiteral:
   EnforcedStyle: mixed
 
 Style/SignalException:
-  EnforcedStyle: semantic
+  EnforcedStyle: only_raise
 
 Style/PercentLiteralDelimiters:
    PreferredDelimiters:

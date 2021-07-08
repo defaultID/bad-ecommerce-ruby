@@ -3,3 +3,34 @@ nav.navbar.navbar-dark.bg-dark.navbar-expand-lg
     = link_to :root, class: 'navbar-brand' do
       span.text-success Good
       | App
+    button[ class = "navbar-toggler"
+            type = "button"
+            data-bs-toggle = "collapse"
+            data-bs-target = "#navbar-top"
+            aria-controls = "navbar-top"
+            aria-expanded = "false"
+            aria-label = "Toggle navigation" ]
+      span.navbar-toggler-icon
+    .collapse.navbar-collapse#navbar-top
+      ul.navbar-nav.me-auto
+        li.nav-item
+          span.navbar-text Test
+      ul.navbar-nav
+        li.nav-item.dropdown
+          a.nav-link.dropdown-toggle[ href = "#"
+                                      id = "navbar-user-menu"
+                                      role = "button"
+                                      data-bs-toggle = "dropdown"
+                                      aria-expanded = "false" ]
+            = logged_in? ? current_user.display_name : 'Anonymous'
+          ul.dropdown-menu.dropdown-menu-dark.dropdown-menu-end[ aria-labelledby = "navbar-user-menu" ]
+            - if logged_in?
+              li
+                = link_to 'My profile', current_user, class: 'dropdown-item'
+              li
+                hr.dropdown-divider
+              li
+                = link_to 'Log out', session_path(current_user.id), class: 'dropdown-item', method: :delete
+            - else
+              li
+                = link_to 'Log in', new_session_path, class: 'dropdown-item'

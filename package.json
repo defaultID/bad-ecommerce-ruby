@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {
     "@babel/preset-typescript": "^7.14.5",
+    "@popperjs/core": "^2.9.2",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.4.0",
     "bootstrap": "^5.0.2",

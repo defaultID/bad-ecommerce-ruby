@@ -16,7 +16,7 @@ class BaseService
   private
 
   def _call(**args)
-    fail NotImplementedError
+    raise NotImplementedError
   end
 
   def invalid(model, result)
