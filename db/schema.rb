@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_06_202614) do
+ActiveRecord::Schema.define(version: 2021_07_08_205623) do
 
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2021_07_06_202614) do
     t.string "address"
     t.string "city"
     t.string "country_code", limit: 2
+    t.boolean "admin", default: false, null: false
     t.index ["api_token"], name: "index_users_on_api_token"
     t.index ["email"], name: "index_users_on_email", unique: true
   end

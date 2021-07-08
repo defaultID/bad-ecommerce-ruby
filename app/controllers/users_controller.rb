@@ -5,22 +5,30 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
-    @users = User.all
+    @users = policy_scope User
   end
 
   # GET /users/1 or /users/1.json
-  def show; end
+  def show
+    authorize @user
+  end
 
   # GET /users/new
   def new
+    authorize User
+
     @user = User.new
   end
 
   # GET /users/1/edit
-  def edit; end
+  def edit
+    authorize @user
+  end
 
   # POST /users or /users.json
   def create
+    authorize User
+
     @user = User::CreateUser.instance.call(params: params.require(:user))
 
     respond_to do |format|
@@ -36,6 +44,8 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1 or /users/1.json
   def update
+    authorize @user
+
     @user = User::UpdateUser.new(
       target: @user,
       actor: nil # current_user
@@ -54,6 +64,8 @@ class UsersController < ApplicationController
 
   # DELETE /users/1 or /users/1.json
   def destroy
+    authorize @user
+
     @user.destroy
     respond_to do |format|
       format.html { redirect_to users_url, flash: { success: 'User was successfully destroyed.' } }

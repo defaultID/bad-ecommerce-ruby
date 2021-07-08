@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class SessionsController < ApplicationController
+  before_action :skip_authorization
+
   # GET /sessions/new
   def new; end
 

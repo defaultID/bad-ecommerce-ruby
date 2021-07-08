@@ -18,8 +18,10 @@
           td = user.country_name
           td = l user.created_at
           td
-            => link_to 'Edit', edit_user_path(user)
-            => link_to 'Destroy', user, data: { confirm: 'Are you sure?' }, method: :delete
+            - if policy(user).edit?
+              => link_to 'Edit', edit_user_path(user)
+            - if policy(user).destroy?
+              => link_to 'Destroy', user, data: { confirm: 'Are you sure?' }, method: :delete
 
   br
 

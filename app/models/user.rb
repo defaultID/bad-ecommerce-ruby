@@ -15,4 +15,8 @@ class User < ApplicationRecord
   def display_name
     full_name || email
   end
+
+  def admin?
+    admin
+  end
 end

@@ -30,12 +30,16 @@ gem 'slim-rails', '~> 3.2'
 
 # Advanced input validations
 gem 'dry-validation', '~> 1.6'
+gem 'dry-initializer', '~> 3.0'
 
 # Simple form
 gem 'simple_form', '~> 5.1'
 
 # Country selection on signup
 gem 'country_select', '~> 6.0'
+
+# Authorization
+gem 'pundit', '~> 2.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
