@@ -6,7 +6,7 @@ main.container
       .col-md-4.col-lg-3
         = link_to product, class: 'link link-dark' do
           .thumb
-            = image_tag product.picture_path, class: 'img-thumbnail'
+            = upload_image_tag product.picture_path, class: 'img-thumbnail'
           h5
             => product.name
             |($

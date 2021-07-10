@@ -2,7 +2,7 @@ main.container
   h1 = @product.name
   .row
     .col-md-6.col-lg-4
-      = image_tag @product.picture_path, class: 'img-fluid'
+      = upload_image_tag @product.picture_path, class: 'img-fluid'
     .col-md-6.col-lg-8
       table.table
         tbody

@@ -9,4 +9,6 @@ import 'bootstrap/js/src/collapse';
 
 import '../javascripts/users.ts';
 
+require.context('../images', true);
+
 Rails.start();
