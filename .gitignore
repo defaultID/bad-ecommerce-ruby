@@ -31,6 +31,9 @@
 # Ignore local vscode settings
 /.vscode
 
+# Ignore uploaded files
+/public/uploads
+
 /public/packs
 /public/packs-test
 /node_modules

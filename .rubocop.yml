@@ -89,6 +89,9 @@ Style/LambdaCall:
 Layout/EmptyLinesAroundClassBody:
   EnforcedStyle: no_empty_lines
 
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
 Layout/LineLength:
   Max: 120
 

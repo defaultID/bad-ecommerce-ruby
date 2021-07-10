@@ -1,0 +1,19 @@
+main.container
+  h1 = @product.name
+  .row
+    .col-md-6.col-lg-4
+      = image_tag @product.picture_path, class: 'img-fluid'
+    .col-md-6.col-lg-8
+      table.table
+        tbody
+          tr
+            th[ scope = "row" ] Price
+            td = @product.price
+          tr
+            th[ scope = "row" ] Description
+            td = @product.description
+
+  - if policy(@product).edit?
+    => link_to 'Edit', edit_product_path(@product)
+    '|
+  =< link_to 'Back', products_path
