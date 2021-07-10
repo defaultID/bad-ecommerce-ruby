@@ -12,7 +12,7 @@ module Picture
     def _call(file:)
       raise RecordNotPersisted unless record.persisted?
 
-      dir_path = self.path.join(record.id.to_s)
+      dir_path = path.join(record.id.to_s)
       file_path = dir_path.join(file.original_filename)
       File.umask(0o0022)
 

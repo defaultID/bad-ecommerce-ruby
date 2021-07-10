@@ -29,8 +29,8 @@ gem 'slim', '~> 4.1'
 gem 'slim-rails', '~> 3.2'
 
 # Advanced input validations
-gem 'dry-validation', '~> 1.6'
 gem 'dry-initializer', '~> 3.0'
+gem 'dry-validation', '~> 1.6'
 
 # Simple form
 gem 'simple_form', '~> 5.1'
