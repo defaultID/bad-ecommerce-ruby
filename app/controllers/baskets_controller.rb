@@ -8,7 +8,7 @@ class BasketsController < ApplicationController
   def show
     authorize @user, :show_basket?
 
-    @basketed = @user.basketed.includes(:product)
+    @basketed = @user.basketed.includes(:product).order(:created_at)
   end
 
   def add_product
