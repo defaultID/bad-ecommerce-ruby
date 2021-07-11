@@ -1,0 +1,69 @@
+body.baskets {
+  .basket {
+    .header,
+    .item {
+      display: grid;
+      grid-template-columns: 1fr 8rem 6rem 15rem;
+      grid-template-areas: "product count cost buttons";
+      gap: 0.2rem;
+      padding: 0.2rem;
+      width: 100%;
+
+      @include media-breakpoint-down(md) {
+        grid-template-columns: 3fr 2fr 4fr;
+        grid-template-areas:
+          "product product product"
+          "count cost buttons";
+      }
+
+      @include media-breakpoint-down(sm) {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+          "product product"
+          "count cost"
+          "buttons buttons";
+      }
+
+      align-items: center;
+    }
+
+    .header {
+      font-weight: 400;
+      font-size: 1.2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid currentColor;
+
+      &>div {
+        justify-self: center;
+      }
+    }
+
+    .item:nth-of-type(2n+1) {
+      box-shadow: inset 0 0 0 9999px $table-striped-bg;
+    }
+
+    .product {
+      grid-area: product;
+    }
+
+    .count {
+      grid-area: count;
+    }
+
+    .cost {
+      grid-area: cost;
+      justify-self: end;
+    }
+
+    .buttons {
+      grid-area: buttons;
+      justify-self: end;
+    }
+
+    .summary {
+      text-align: right;
+      padding: 0.2rem;
+      border-top: 1px solid currentColor;
+    }
+  }
+}

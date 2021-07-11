@@ -1,0 +1,28 @@
+main.container
+  h1 #{@user.display_name}'s basket
+  .basket
+    .header
+      .product Product
+      .count Count
+      .cost Cost
+      .buttons Actions
+    .contents
+      - @basketed.each do |item|
+        = simple_form_for(item,
+          url: user_basket_item_path(@user, item),
+          wrapper: :vertical_no_valid,
+          html: { class: 'item' }) do |f|
+          .product = link_to item.product.name, item.product
+          .count = f.input :count, label: false
+          .cost $#{sprintf "%0.2f", item.items_cost}
+          .buttons
+            => f.button :submit, 'Update', class: 'btn-success' if policy(item).update?
+            => link_to 'Delete', user_basket_item_path(@user, item),
+              data: { confirm: 'Are you sure?' },
+              method: :delete,
+              class: 'btn btn-danger' if policy(item).destroy?
+    .summary
+      strong> Total:
+      | $#{sprintf "%0.2f", @basketed.total_cost}
+
+  =< link_to 'Back', products_path

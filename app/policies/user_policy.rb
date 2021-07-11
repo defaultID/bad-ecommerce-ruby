@@ -21,6 +21,10 @@ class UserPolicy < ApplicationPolicy
     user.admin?
   end
 
+  def show_basket?
+    update?
+  end
+
   class Scope < Scope
     def resolve
       user.admin? ? scope.all : scope.where(id: user.id)

@@ -30,6 +30,8 @@ nav.navbar.navbar-dark.bg-dark.navbar-expand-lg
               li
                 = link_to 'My profile', current_user, class: 'dropdown-item'
               li
+                = link_to 'My basket', user_basket_path(current_user), class: 'dropdown-item'
+              li
                 hr.dropdown-divider
               li
                 = link_to 'Log out', session_path(current_user.id), class: 'dropdown-item', method: :delete

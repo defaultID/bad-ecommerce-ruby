@@ -25,4 +25,7 @@
   - if policy(@user).edit?
     => link_to 'Edit', edit_user_path(@user)
     '|
+  - if policy(@user).show_basket?
+    => link_to 'Basket', user_basket_path(@user)
+    '|
   =< link_to 'Back', users_path
