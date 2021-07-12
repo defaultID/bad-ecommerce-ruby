@@ -11,8 +11,10 @@ class Basket
         user_id: user.id,
         product_id: product.id
       )
-      basket.count += count.to_i
-      basket.save
+      basket.with_lock do
+        basket.count += count.to_i
+        basket.save
+      end
     end
   end
 end
