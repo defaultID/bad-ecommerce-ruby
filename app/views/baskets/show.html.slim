@@ -22,7 +22,10 @@ main.container
               method: :delete,
               class: 'btn btn-danger' if policy(item).destroy?
     .summary
-      strong> Total:
-      | $#{sprintf "%0.2f", @basketed.total_cost}
+      div
+        strong> Total:
+        | $#{sprintf "%0.2f", @basketed.total_cost}
+      div
+        = link_to 'Checkout', user_orders_path(@user), class: 'btn btn-primary', method: :post
 
   =< link_to 'Back', products_path

@@ -1,0 +1,13 @@
+main.container
+  h1 Payment
+
+  h3 Select payment method
+  .card
+    h5.card-header Dummy
+    .card-body
+      p.card-text Pay $#{@order.total_cost} for order ##{@order.id}
+    .card-footer
+      = form_tag confirm_payment_order_path(@order), method: :get do
+        = hidden_field_tag :payment_method, 'dummy'
+        = hidden_field_tag :confirmation_key, SecureRandom.hex(16)
+        = submit_tag "Pay $#{@order.total_cost}", class: 'btn btn-primary'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_10_232643) do
+ActiveRecord::Schema.define(version: 2021_07_12_221148) do
 
   create_table "baskets", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -21,6 +21,27 @@ ActiveRecord::Schema.define(version: 2021_07_10_232643) do
     t.index ["product_id"], name: "index_baskets_on_product_id"
     t.index ["user_id", "product_id"], name: "index_baskets_on_user_id_and_product_id", unique: true
     t.index ["user_id"], name: "index_baskets_on_user_id"
+  end
+
+  create_table "order_items", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.bigint "product_id"
+    t.decimal "price", precision: 15, scale: 4, null: false
+    t.integer "count", unsigned: true
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["product_id"], name: "index_order_items_on_product_id"
+  end
+
+  create_table "orders", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "status", limit: 1, default: 0, null: false, unsigned: true
+    t.integer "payment_method", limit: 1, unsigned: true
+    t.string "payment_id"
+    t.datetime "shipped_at", precision: 6
+    t.datetime "received_at", precision: 6
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "products", charset: "utf8mb4", force: :cascade do |t|
@@ -50,4 +71,7 @@ ActiveRecord::Schema.define(version: 2021_07_10_232643) do
 
   add_foreign_key "baskets", "products", on_delete: :cascade
   add_foreign_key "baskets", "users", on_delete: :cascade
+  add_foreign_key "order_items", "orders", on_delete: :cascade
+  add_foreign_key "order_items", "products", on_delete: :nullify
+  add_foreign_key "orders", "users", on_delete: :cascade
 end

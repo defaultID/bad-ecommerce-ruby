@@ -51,14 +51,18 @@ class UsersController < ApplicationController
       actor: nil # current_user
     ).call(params: params.require(:user))
 
-    respond_to do |format|
-      if @user.errors.empty?
-        format.html { redirect_to @user, flash: { success: 'User was successfully updated.' } }
-        format.json { render :show, status: :ok, location: @user }
+    if @user.errors.empty?
+      if session[:return_to_order].present?
+        session[:address_confirmed] = true
+
+        redirect_to pay_order_path(session[:return_to_order]), notice: 'User address was successfully confirmed.'
+
+        session.delete(:return_to_order)
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        redirect_to @user, flash: { success: 'User was successfully updated.' }
       end
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 

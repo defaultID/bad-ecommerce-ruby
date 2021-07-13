@@ -5,6 +5,7 @@ class User < ApplicationRecord
   attr_accessor :password_confirmation
 
   has_many :basketed, class_name: 'Basket', dependent: :destroy
+  has_many :orders, dependent: :destroy
 
   def password=(new_password)
     self[:encrypted_password] = Digest::MD5.hexdigest(new_password)

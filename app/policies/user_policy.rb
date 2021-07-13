@@ -25,6 +25,10 @@ class UserPolicy < ApplicationPolicy
     update?
   end
 
+  def order?
+    user == record
+  end
+
   class Scope < Scope
     def resolve
       user.admin? ? scope.all : scope.where(id: user.id)

@@ -1,0 +1,34 @@
+main.container
+  h1 Listing orders
+
+  table.table.table-striped
+    thead
+      tr
+        th[ scope = "col" ] Ordered at
+        th[ scope = "col" ] Status
+        th[ scope = "col" ] Total cost
+        th[ scope = "col" ] Payment method
+        th[ scope = "col" ] Shipped at
+        th[ scope = "col" ] Received at
+        th[ scope = "col" ] Actions
+
+    tbody
+      - @orders.each do |order|
+        tr
+          td = link_to l(order.created_at), order
+          td = order.status
+          td = order.total_cost
+          td = order.payment_method
+          td = order.shipped_at
+          td = order.received_at
+          td
+            - if policy(order).pay?
+              => link_to 'Pay', pay_order_path(order), class: 'btn btn-primary'
+            - if policy(order).confirm_shipment?
+              => link_to 'Mark as shipped', confirm_shipment_order_path(order), class: 'btn btn-primary', method: :post
+            - if policy(order).confirm_receipt?
+              => link_to 'Mark as received', confirm_receipt_order_path(order), class: 'btn btn-success', method: :post
+            - if policy(order).destroy?
+              => link_to 'Delete', order_path(order), class: 'btn btn-danger', method: :delete
+
+  br

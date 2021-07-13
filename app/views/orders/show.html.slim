@@ -1,0 +1,48 @@
+main.container
+  h1 Order details
+  table.table.table-striped
+    tbody
+      tr
+        th[ scope = "row" ] Order status
+        td = @order.status.humanize
+      - if @order.paid?
+        tr
+          th[ scope = "row" ] Payment method
+          td = @order.payment_method.humanize
+      - if @order.shipped?
+        tr
+          th[ scope = "row" ] Shipped at
+          td = l @order.shipped_at
+      - if @order.received?
+        tr
+          th[ scope = "row" ] Received at
+          td = l @order.received_at
+
+  h3 Items
+  table.table.table-striped
+    thead
+      tr
+        th[ scope = "col" ] Product
+        th[ scope = "col" ] Price
+        th[ scope = "col" ] Count
+        th[ scope = "col" ] Total cost
+    tbody
+      - @order_items.each do |item|
+        tr
+          td = link_to item.product_name, item.product
+          td = sprintf "%0.2f", item.price
+          td = item.count
+          td = sprintf "%0.2f", item.items_cost
+      tr
+        th[ scope = "row" colspan = "3" ] Total
+        td = sprintf "%0.2f", @order.total_cost
+
+  - if policy(@order).pay?
+    => link_to 'Pay and confirm', pay_order_path(@order), class: 'btn btn-success'
+  - if policy(@order).confirm_shipment?
+    => link_to 'Mark as shipped', confirm_shipment_order_path(@order), class: 'btn btn-primary', method: :post
+  - if policy(@order).confirm_receipt?
+    => link_to 'Mark as received', confirm_receipt_order_path(@order), class: 'btn btn-success', method: :post
+  - if policy(@order).destroy?
+    => link_to 'Delete', order_path(order), class: 'btn btn-danger', method: :delete
+  => link_to 'Back', user_orders_path(@order.user), class: 'btn btn-secondary'

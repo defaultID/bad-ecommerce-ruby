@@ -9,6 +9,15 @@ Rails.application.routes.draw do
       post :add_product
     end
     resources :basket, only: %i[update destroy], controller: :baskets, as: :basket_items
+    resources :orders, only: %i[index create show destroy], shallow: true do
+      member do
+        get :pay
+        get :confirm_payment
+        get :confirm
+        post :confirm_shipment
+        post :confirm_receipt
+      end
+    end
   end
   resources :products
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
