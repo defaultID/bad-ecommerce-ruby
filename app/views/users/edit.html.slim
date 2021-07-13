@@ -3,7 +3,8 @@ main.container
 
   == render 'form'
 
-  => link_to 'Show', @user
-  '|
-  =< link_to 'Back', users_path
+  - unless session[:return_to_order].present?
+    => link_to 'Show', @user
+    '|
+    =< link_to 'Back', users_path
 
