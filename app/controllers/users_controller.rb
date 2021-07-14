@@ -2,7 +2,7 @@
 
 class UsersController < ApplicationController
   before_action :require_login, except: %i[show]
-  before_action :set_user, only: %i[show edit update destroy]
+  before_action :set_user, only: %i[show edit update destroy show_picture]
 
   # GET /users or /users.json
   def index
@@ -77,6 +77,23 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url, flash: { success: 'User was successfully destroyed.' } }
       format.json { head :no_content }
     end
+  end
+
+  def show_picture
+    authorize @user
+
+    file_name = File.basename params[:name]
+    file_path = Rails.root.join "public/uploads/users/#{@user.id}/#{file_name}"
+
+    unless File.exist?(file_path)
+      redirect_to(
+        helpers.asset_pack_path('media/images/No_image_available.svg')
+      ) and return
+    end
+
+    file_type = MimeMagic.by_magic(File.open(file_path)) || 'application/octet-stream'
+
+    send_file file_path, type: file_type, disposition: 'inline'
   end
 
   private

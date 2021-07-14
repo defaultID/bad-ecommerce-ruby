@@ -22,8 +22,18 @@ class User
     end
 
     def persist(result)
-      target.update! result.to_h
-      target
+      result = result.to_h
+      uploaded_file = result.delete(:picture)
+
+      User.transaction do
+        target.update! result
+        if uploaded_file
+          target.update!(
+            picture: Picture::UploadPicture.new(record: target).call(file: uploaded_file)
+          )
+        end
+        target
+      end
     end
   end
 end

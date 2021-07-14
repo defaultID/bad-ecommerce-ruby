@@ -5,6 +5,7 @@
 - Ruby 3.0.1
 - `bundler`
 - `libmysqlclient-dev`
+- `shared-mime-info` for uploads type check
 - MySQL >= 5.7 (can be on the other host)
 
 You can use system ruby or install the required version using `rvm` or `rbenv`.
@@ -30,6 +31,7 @@ You can use system ruby or install the required version using `rvm` or `rbenv`.
 - `countries` to see actual country names (MIT License)
 - `country_select` for user country input (MIT License)
 - `pundit` to authorize actions (MIT License)
+- `mimemagic` to ensure that uploaded pictures are images (MIT License)
 
 ### Frontend
 - `bootstrap` (MIT License)

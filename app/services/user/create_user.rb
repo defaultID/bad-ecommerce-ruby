@@ -20,9 +20,19 @@ class User
 
     def persist(result)
       result = result.to_h
+      uploaded_file = result.delete(:picture)
+
       result[:api_token] = SecureRandom.hex(16)
 
-      User.create! result
+      User.transaction do
+        user = User.create! result
+        if uploaded_file
+          user.update!(
+            picture: Picture::UploadPicture.new(record: user).call(file: uploaded_file)
+          )
+        end
+        user
+      end
     end
   end
 end

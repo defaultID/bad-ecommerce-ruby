@@ -1,28 +1,32 @@
 .container
   h1 User profile for #{@user.display_name}
 
-  table.table.table-striped
-    tbody
-      - if policy(@user).show_details?
-        tr
-          th[ scope = "row" ] Email
-          td = @user.email
-      tr
-        th[ scope = "row" ] Name
-        td = @user.full_name
-      tr
-        th[ scope = "row" ] Country
-        td = @user.country_name
-      - if policy(@user).show_details?
-        tr
-          th[ scope = "row" ] City
-          td = @user.city
-        tr
-          th[ scope = "row" ] Address
-          td = @user.address
-      tr
-        th[ scope = "row" ] Registered at
-        td = l @user.created_at
+  .row
+    .col-md-6.col-lg-4
+      = image_tag picture_user_path(@user, name: @user.picture), class: 'img-fluid'
+    .col-md-6.col-lg-8
+      table.table.table-striped
+        tbody
+          - if policy(@user).show_details?
+            tr
+              th[ scope = "row" ] Email
+              td = @user.email
+          tr
+            th[ scope = "row" ] Name
+            td = @user.full_name
+          tr
+            th[ scope = "row" ] Country
+            td = @user.country_name
+          - if policy(@user).show_details?
+            tr
+              th[ scope = "row" ] City
+              td = @user.city
+            tr
+              th[ scope = "row" ] Address
+              td = @user.address
+          tr
+            th[ scope = "row" ] Registered at
+            td = l @user.created_at
 
   - if policy(@user).edit?
     => link_to 'Edit', edit_user_path(@user)

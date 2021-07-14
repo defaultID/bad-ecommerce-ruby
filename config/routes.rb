@@ -22,6 +22,10 @@ Rails.application.routes.draw do
         post :confirm_receipt
       end
     end
+
+    member do
+      get :picture, action: :show_picture
+    end
   end
 
   resources :products

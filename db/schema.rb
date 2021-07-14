@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_14_123942) do
+ActiveRecord::Schema.define(version: 2021_07_14_190350) do
 
   create_table "baskets", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 2021_07_14_123942) do
     t.string "email", null: false
     t.string "encrypted_password", limit: 128, null: false
     t.string "api_token", limit: 128, null: false
+    t.string "picture"
     t.string "full_name"
     t.string "address"
     t.string "city"

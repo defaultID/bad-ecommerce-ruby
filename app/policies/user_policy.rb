@@ -29,6 +29,10 @@ class UserPolicy < ApplicationPolicy
     update?
   end
 
+  def show_picture?
+    true
+  end
+
   def order?
     user == record
   end

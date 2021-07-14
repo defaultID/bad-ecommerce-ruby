@@ -22,4 +22,8 @@ class User < ApplicationRecord
   def admin?
     admin
   end
+
+  def picture_path
+    "/uploads/users/#{id}/#{picture}" if picture.present?
+  end
 end
