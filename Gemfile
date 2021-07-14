@@ -36,6 +36,7 @@ gem 'dry-validation', '~> 1.6'
 gem 'simple_form', '~> 5.1'
 
 # Country selection on signup
+gem 'countries', '~> 4.0'
 gem 'country_select', '~> 6.0'
 
 # Authorization

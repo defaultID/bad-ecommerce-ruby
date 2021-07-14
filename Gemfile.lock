@@ -252,6 +252,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
+  countries (~> 4.0)
   country_select (~> 6.0)
   dotenv-rails (~> 2.7)
   dry-initializer (~> 3.0)

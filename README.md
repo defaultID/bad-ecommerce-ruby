@@ -1,1 +1,36 @@
 # bad-e-commerce-Ruby
+
+## Requirements
+
+- Ruby 3.0.1
+- `bundler`
+- `libmysqlclient-dev`
+- MySQL >= 5.7 (can be on the other host)
+
+You can use system ruby or install the required version using `rvm` or `rbenv`.
+
+## Installation
+
+- clone the git repo
+- run `bundle install` (`bundle help install` for available options)
+- run `yarn install` to install frontend dependencies
+- create MySQL user with access to `badapp_%` databases (or other name if you need)
+- confugure environment variables or `.env` file for database access (see `.env.example`)
+- run `./bin/rails db:setup` to load schema and initial data to MySQL database
+- run `./bin/rails server` or use your favorite rack application server (passenger etc) to run the app
+
+## Used gems, assets and libraries
+
+### Backend
+
+- Default Rails dependencies
+- `slim` for templates (MIT License)
+- parts of `dry-rb` for input validation (MIT License)
+- `simple_form` to simplify form templates (MIT License)
+- `countries` to see actual country names (MIT License)
+- `country_select` for user country input (MIT License)
+- `pundit` to authorize actions (MIT License)
+
+### Frontend
+- `bootstrap` (MIT License)
+- `tom-select` for user country input (Apache License 2.0)
