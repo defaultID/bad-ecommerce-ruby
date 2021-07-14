@@ -19,7 +19,13 @@ class Order < ApplicationRecord
   }, _suffix: true, _scopes: false
 
   def total_cost
-    items.sum('price * count')
+    if items.loaded?
+      # Use item method to calculate cost
+      items.sum(&:items_cost)
+    else
+      # Assume that we won't load all items and use SQL to calculate cost
+      items.sum('price * count')
+    end
   end
 
   def expired?

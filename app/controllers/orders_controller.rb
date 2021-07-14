@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class OrdersController < ApplicationController
+  include TokenAuthentication
+
   before_action :set_user, only: %i[index create]
   before_action :set_order, only: %i[
     show
@@ -9,19 +11,41 @@ class OrdersController < ApplicationController
     destroy
   ]
 
-  # GET /orders or /orders.json
-  def index
+  prepend_before_action :authenticate_by_token, only: %i[index]
+
+  # GET /orders or /orders.xml
+  def index # rubocop:disable Metrics/AbcSize
     @orders = policy_scope(@user.orders).order(created_at: :desc)
+
+    respond_to do |format|
+      format.html
+      format.xml do
+        if request.body.size.positive?
+          xml_body = Nokogiri::XML(request.body) do |config|
+            # noent actually means 'expand entities'
+            config.strict.nonoent
+          end
+
+          @date_start = xml_body.at_css('orders>dateStart').text
+          @date_end = xml_body.at_css('orders>dateEnd').text
+
+          @orders = @orders.where('created_at > ?', @date_start) if @date_start.present?
+          @orders = @orders.where('created_at < ?', @date_end) if @date_end.present?
+        end
+
+        @orders = @orders.includes(items: :product)
+      end
+    end
   end
 
-  # GET /orders/1 or /orders/1.json
+  # GET /orders/1
   def show
     authorize @order
 
     @order_items = @order.items.includes(:product)
   end
 
-  # POST /orders or /orders.json
+  # POST /orders
   def create
     authorize @user, :order?
 
@@ -89,7 +113,7 @@ class OrdersController < ApplicationController
     end
   end
 
-  # DELETE /orders/1 or /orders/1.json
+  # DELETE /orders/1
   def destroy
     authorize @order
 
