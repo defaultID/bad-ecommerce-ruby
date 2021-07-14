@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class BasketsController < ApplicationController
+  before_action :require_login
   before_action :set_user, only: %i[add_product show]
   before_action :set_basket, only: %i[update destroy]
 

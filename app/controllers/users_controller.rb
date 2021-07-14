@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
+  before_action :require_login, except: %i[show]
   before_action :set_user, only: %i[show edit update destroy]
 
   # GET /users or /users.json
   def index
+    authorize User
     @users = policy_scope User
   end
 

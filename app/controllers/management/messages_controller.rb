@@ -2,8 +2,8 @@
 
 module Management
   class MessagesController < ApplicationController
-    before_action :set_management_message, only: %i[destroy]
     before_action :require_login, except: %i[create]
+    before_action :set_management_message, only: %i[destroy]
 
     # GET /management/messages or /management/messages.json
     def index

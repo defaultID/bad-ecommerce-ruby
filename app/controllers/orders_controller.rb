@@ -3,6 +3,7 @@
 class OrdersController < ApplicationController
   include TokenAuthentication
 
+  before_action :require_login
   before_action :set_user, only: %i[index create]
   before_action :set_order, only: %i[
     show
