@@ -1,0 +1,13 @@
+main.container
+  h1
+    - if logged_in?
+      = t :welcome, email: current_user.email
+    - else
+      = t :welcome_anonymous
+
+  h3 Latest products
+
+  = render partial: 'products/list'
+
+  div.mt-4
+    = link_to 'More products', products_path, class: 'btn btn-secondary'

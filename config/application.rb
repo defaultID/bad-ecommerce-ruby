@@ -38,5 +38,7 @@ module Badapp
     config.generators.system_tests = nil
 
     config.hosts += ENV['BADAPP_ALLOWED_HOSTS'].split if ENV['BADAPP_ALLOWED_HOSTS'].present?
+
+    config.i18n.available_locales = %i[en ru]
   end
 end

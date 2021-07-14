@@ -1,0 +1,3 @@
+ru:
+  welcome: 'Добро пожаловать, %{email}'
+  welcome_anonymous: 'Главная'
