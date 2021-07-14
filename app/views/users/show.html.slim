@@ -3,21 +3,23 @@
 
   table.table.table-striped
     tbody
-      tr
-        th[ scope = "row" ] Email
-        td = @user.email
+      - if policy(@user).show_details?
+        tr
+          th[ scope = "row" ] Email
+          td = @user.email
       tr
         th[ scope = "row" ] Name
         td = @user.full_name
       tr
         th[ scope = "row" ] Country
         td = @user.country_name
-      tr
-        th[ scope = "row" ] City
-        td = @user.city
-      tr
-        th[ scope = "row" ] Address
-        td = @user.address
+      - if policy(@user).show_details?
+        tr
+          th[ scope = "row" ] City
+          td = @user.city
+        tr
+          th[ scope = "row" ] Address
+          td = @user.address
       tr
         th[ scope = "row" ] Registered at
         td = l @user.created_at

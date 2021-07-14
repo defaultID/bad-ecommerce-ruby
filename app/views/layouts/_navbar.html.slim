@@ -13,8 +13,10 @@ nav.navbar.navbar-dark.bg-dark.navbar-expand-lg
       span.navbar-toggler-icon
     .collapse.navbar-collapse#navbar-top
       ul.navbar-nav.me-auto
-        li.nav-item
-          = link_to 'Users', users_path, class: 'nav-link'
+        - if policy(User).index?
+          li.nav-item
+            = link_to 'Users', users_path, class: 'nav-link'
+
         li.nav-item
           = link_to 'Products', products_path, class: 'nav-link'
         li.nav-item

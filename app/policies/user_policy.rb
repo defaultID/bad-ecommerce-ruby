@@ -25,6 +25,10 @@ class UserPolicy < ApplicationPolicy
     update?
   end
 
+  def show_details?
+    update?
+  end
+
   def order?
     user == record
   end
