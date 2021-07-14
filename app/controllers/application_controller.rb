@@ -21,4 +21,20 @@ class ApplicationController < ActionController::Base
   def logged_out?
     !logged_in?
   end
+
+  rescue_from Pundit::NotAuthorizedError do |e|
+    @error_message = e.message
+
+    render 'error/show', status: :forbidden
+  end
+
+  private
+
+  def require_login
+    return if logged_in?
+
+    session[:return_to] = request.fullpath if request.get?
+
+    redirect_to new_session_path, status: :see_other
+  end
 end

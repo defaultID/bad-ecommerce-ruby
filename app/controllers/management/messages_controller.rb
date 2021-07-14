@@ -3,9 +3,12 @@
 module Management
   class MessagesController < ApplicationController
     before_action :set_management_message, only: %i[destroy]
+    before_action :require_login, except: %i[create]
 
     # GET /management/messages or /management/messages.json
     def index
+      authorize Management::Message
+
       @management_messages = policy_scope(Management::Message.all).order(created_at: :desc)
     end
 

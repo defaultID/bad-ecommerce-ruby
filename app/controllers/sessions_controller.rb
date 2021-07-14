@@ -30,12 +30,20 @@ class SessionsController < ApplicationController
 
   private
 
+  def redirect_allowed?(referer)
+    referer.host == request.host && referer.path != new_session_path
+  end
+
   def set_return_to
+    return if session[:return_to].present?
+
     referer = URI(request.headers[:referer])
-    session[:return_to] = if referer.host == request.host
+    session[:return_to] = if redirect_allowed?(referer)
                             referer.query.present? ? "#{referer.path}?#{referer.query}" : referer.path
                           else
                             root_path
                           end
+  rescue ArgumentError, URI::Error
+    session[:return_to] = root_path
   end
 end
