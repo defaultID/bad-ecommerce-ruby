@@ -14,7 +14,7 @@ default: &default
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: <%= ENV.fetch("BADAPP_DATABASE_USER") { 'badapp' } %>
-  password: <%= ENV.fetch("BADAPP_DATABASE_PASSWORD") %>
+  password: <%= ENV.fetch("BADAPP_DATABASE_PASSWORD") { '' } %>
   host: <%= ENV.fetch("BADAPP_DATABASE_HOST") { 'localhost' } %>
   port: <%= ENV.fetch("BADAPP_DATABASE_PORT") { 3306 } %>
   socket: /var/run/mysqld/mysqld.sock
