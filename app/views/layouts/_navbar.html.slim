@@ -17,6 +17,13 @@ nav.navbar.navbar-dark.bg-dark.navbar-expand-lg
           = link_to 'Users', users_path, class: 'nav-link'
         li.nav-item
           = link_to 'Products', products_path, class: 'nav-link'
+        li.nav-item
+          = link_to 'Contacts', contacts_path, class: 'nav-link'
+
+        - if policy(Management::Message).index?
+          li.nav-item
+            = link_to 'Messages', management_messages_path, class: 'nav-link'
+
       ul.navbar-nav
         li.nav-item.dropdown
           a.nav-link.dropdown-toggle[ href = "#"

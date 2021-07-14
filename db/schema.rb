@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_12_221148) do
+ActiveRecord::Schema.define(version: 2021_07_14_123942) do
 
   create_table "baskets", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -21,6 +21,16 @@ ActiveRecord::Schema.define(version: 2021_07_12_221148) do
     t.index ["product_id"], name: "index_baskets_on_product_id"
     t.index ["user_id", "product_id"], name: "index_baskets_on_user_id_and_product_id", unique: true
     t.index ["user_id"], name: "index_baskets_on_user_id"
+  end
+
+  create_table "management_messages", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "name"
+    t.string "email"
+    t.text "message"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_management_messages_on_user_id"
   end
 
   create_table "order_items", charset: "utf8mb4", force: :cascade do |t|
@@ -71,6 +81,7 @@ ActiveRecord::Schema.define(version: 2021_07_12_221148) do
 
   add_foreign_key "baskets", "products", on_delete: :cascade
   add_foreign_key "baskets", "users", on_delete: :cascade
+  add_foreign_key "management_messages", "users", on_delete: :nullify
   add_foreign_key "order_items", "orders", on_delete: :cascade
   add_foreign_key "order_items", "products", on_delete: :nullify
   add_foreign_key "orders", "users", on_delete: :cascade

@@ -1,0 +1,6 @@
+main.container
+  h1 Contacts for #{@country}
+  p Visit us at #{sanitize @address}
+
+  h3 Leave a message to us
+  = render partial: 'management/messages/form'

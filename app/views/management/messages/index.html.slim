@@ -1,0 +1,25 @@
+main.container
+  h1 Listing messages
+
+  table.table.table-striped
+    thead
+      tr
+        th User
+        th Name
+        th Email
+        th Message
+        th Actions
+
+    tbody
+      - @management_messages.each do |management_message|
+        tr
+          td
+            - if management_message.user.present?
+              = link_to management_message.user.display_name, management_message.user
+            - else
+              | Anonymous
+          td = management_message.name
+          td = management_message.email
+          td = sanitize management_message.message
+          td
+            = link_to 'Destroy', management_message, data: { confirm: 'Are you sure?' }, method: :delete
