@@ -13,13 +13,8 @@ main.container
             = product.price
             |)
         .description = product.description
-        .basket
-          = simple_form_for(Basket.new,
-            url: add_product_user_basket_path(current_user),
-            wrapper: :inline_no_valid) do |f|
-            = f.hidden_field :product_id, value: product.id, id: nil
-            = f.input :count, label: false, input_html: { id: nil }
-            = f.button :submit, 'Add', class: 'btn-success'
+        - if policy(Basket).add_product?
+          = render partial: 'add_to_basket', object: product, as: :product
         .actions
           => link_to 'Edit', edit_product_path(product) if policy(product).edit?
           => link_to 'Destroy', product, data: { confirm: 'Are you sure?' }, method: :delete if policy(product).destroy?
