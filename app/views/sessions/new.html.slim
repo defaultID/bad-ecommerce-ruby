@@ -7,4 +7,5 @@ main.container
       = f.input :password
 
     .actions
-      = f.button :submit, class: 'btn-primary', value: 'Log in'
+      => f.button :submit, class: 'btn-primary', value: 'Log in'
+      => link_to 'OAuth', @oauth_provider_url, class: 'btn btn-warning'

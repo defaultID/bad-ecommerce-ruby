@@ -37,6 +37,7 @@ You can use system ruby or install the required version using `rvm` or `rbenv`.
 - `country_select` for user country input (MIT License)
 - `pundit` to authorize actions (MIT License)
 - `mimemagic` to ensure that uploaded pictures are images (MIT License)
+- `faraday` to simplify http request code (MIT License)
 
 ### Frontend
 - `bootstrap` (MIT License)

@@ -45,6 +45,9 @@ gem 'pundit', '~> 2.1'
 # Upload type checking
 gem 'mimemagic', '~> 0.4.3'
 
+# Better HTTP client
+gem 'faraday', '~> 1.5'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

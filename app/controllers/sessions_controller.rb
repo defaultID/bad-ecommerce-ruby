@@ -6,6 +6,16 @@ class SessionsController < ApplicationController
   # GET /sessions/new
   def new
     set_return_to
+
+    session[:oauth_state] = SecureRandom.alphanumeric(15)
+
+    oauth_params = {
+      response_type: 'code',
+      client_id: 'application-login',
+      redirect_uri: oauth_url,
+      state: session[:oauth_state],
+    }
+    @oauth_provider_url = "http://auth.secureflag:18080/auth/realms/VulnerableApp/protocol/openid-connect/auth?#{oauth_params.to_query}"
   end
 
   # POST /sessions
