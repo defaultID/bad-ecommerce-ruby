@@ -9,3 +9,32 @@ main.container
     .actions
       => f.button :submit, class: 'btn-primary', value: 'Log in'
       => link_to 'OAuth', @oauth_provider_url, class: 'btn btn-warning'
+
+  = form_tag oauth_path, id: 'oauthLogin' do
+    = hidden_field_tag :token, '', id: 'token'
+
+javascript:
+  async function logInWithCode(code) {
+    // exchange the code for the token
+    const tokenResponse = await fetch('http://auth.secureflag:18080/auth/realms/VulnerableApp/protocol/openid-connect/token', {
+      method: 'POST',
+      body: new URLSearchParams({
+        grant_type: 'authorization_code',
+        client_id: 'application-login',
+        client_secret: atob('OTRjZTc4NDAtZWY4Zi00MjE1LThhMzYtMzliNmRmY2Q4OGRk'), // XXX encrypted secret!
+        redirect_uri: '#{oauth_url}',
+        code
+      })
+    });
+
+    // use the token to log into the application
+    const {access_token} = await tokenResponse.json();
+    document.getElementById('token').value = access_token;
+    document.getElementById('oauthLogin').submit();
+  }
+
+  // if the code is present start the login process
+  const code = new URLSearchParams(window.location.search).get('code')
+  if (code) {
+    logInWithCode(code);
+  }

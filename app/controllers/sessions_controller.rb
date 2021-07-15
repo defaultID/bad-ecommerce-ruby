@@ -7,13 +7,13 @@ class SessionsController < ApplicationController
   def new
     set_return_to
 
-    session[:oauth_state] = SecureRandom.alphanumeric(15)
+    session[:oauth_state] = SecureRandom.alphanumeric(15) unless params.include? :code
     Rails.logger.debug { "OAuth state: #{session[:oauth_state]}" }
 
     oauth_params = {
       response_type: 'code',
       client_id: 'application-login',
-      redirect_uri: oauth_url,
+      redirect_uri: new_session_path,
       state: session[:oauth_state],
     }
     @oauth_provider_url = "http://auth.secureflag:18080/auth/realms/VulnerableApp/protocol/openid-connect/auth?#{oauth_params.to_query}"
