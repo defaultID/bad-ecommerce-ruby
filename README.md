@@ -19,6 +19,11 @@ You can use system ruby or install the required version using `rvm` or `rbenv`.
 - confugure environment variables or `.env` file for database access (see `.env.example`)
 - run `./bin/rails db:setup` to load schema and initial data to MySQL database
 - run `./bin/rails server` or use your favorite rack application server (passenger etc) to run the app
+- use Rails console (`./bin/rails c`) to set user passwords:
+
+  ```ruby
+  User.find_by(email: 'user@vulnerableapp.com').update!(password: 'newpassword')
+  ```
 
 ## Used gems, assets and libraries
 
