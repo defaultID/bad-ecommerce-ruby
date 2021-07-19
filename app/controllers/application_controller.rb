@@ -42,7 +42,11 @@ class ApplicationController < ActionController::Base
   end
 
   def apply_language(&action)
-    locale = LANGUAGES.include?(settings[:language].to_sym) ? settings[:language] : LANGUAGES.first
+    locale = if settings[:language].present? && LANGUAGES.include?(settings[:language].to_sym)
+               settings[:language]
+             else
+               LANGUAGES.first
+             end
 
     I18n.with_locale(locale, &action)
   end
