@@ -34,7 +34,8 @@ Rails.application.routes.draw do
   end
 
   get '/contacts', to: 'contacts#index'
-  get '/oauth', to: 'oauth#index'
+  get '/oauth', to: 'oauth#code'
+  post '/oauth', to: 'oauth#token'
   post '/set_language/:lang', to: 'welcome#set_language', as: :set_language
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

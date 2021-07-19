@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
     set_return_to
 
     session[:oauth_state] = SecureRandom.alphanumeric(15)
+    Rails.logger.debug { "OAuth state: #{session[:oauth_state]}" }
 
     oauth_params = {
       response_type: 'code',

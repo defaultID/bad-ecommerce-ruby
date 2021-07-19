@@ -3,24 +3,37 @@
 class OauthController < ApplicationController
   class StateMismatch < StandardError; end
 
-  before_action :skip_policy_scope
+  before_action :skip_authorization
+  before_action :check_state
+  before_action :set_oauth_client
 
-  def index
-    login_with_code(oauth_params[:state], session[:oauth_state], oauth_params[:code])
+  def code
+    email = @oauth_client.authenticate_user_from_code(oauth_params[:code])
+
+    sign_in_user(email)
+  end
+
+  def token
+    email = @oauth_client.authenticate_user_from_access_token(oauth_params[:token])
+
+    sign_in_user(email)
+  end
+
+  rescue_from StateMismatch, OAuthClient::Error, ActiveRecord::RecordNotFound do |e|
+    reset_session
+    redirect_to new_session_path, alert: e
   end
 
   private
 
-  def login_with_code(state, session_state, code)
-    raise StateMismatch, 'OAuth state does not match' unless state.present? && state == session_state
+  def check_state
+    state = oauth_params[:state]
 
-    oauth_client = OAuthClient.instance(redirect_uri: oauth_url)
-    email = oauth_client.authenticate_user_from_code(code)
+    raise StateMismatch, 'OAuth state does not match' unless state.present? && state == session[:oauth_state]
+  end
 
-    sign_in_user(email)
-  rescue StateMismatch, OAuthClient::Error, ActiveRecord::RecordNotFound => e
-    reset_session
-    redirect_to new_session_path, alert: e
+  def set_oauth_client
+    @oauth_client = OAuthClient.instance(redirect_uri: oauth_url)
   end
 
   def sign_in_user(email)
@@ -32,6 +45,6 @@ class OauthController < ApplicationController
   end
 
   def oauth_params
-    params.permit(:state, :code)
+    params.permit(:state, :code, :token)
   end
 end
