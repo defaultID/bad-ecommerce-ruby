@@ -15,7 +15,7 @@ You can use system ruby or install the required version using `rvm` or `rbenv`.
 - clone the git repo
 - run `bundle install` (`bundle help install` for available options)
 - run `yarn install` to install frontend dependencies
-- create MySQL user with access to `badapp_%` databases (or other name if you need)
+- create MySQL user with access to `vulnerableapp_%` databases (or other name if you need)
 - confugure environment variables or `.env` file for database access (see `.env.example`)
 - run `./bin/rails db:setup` to load schema and initial data to MySQL database
 - run `./bin/rails server` or use your favorite rack application server (passenger etc) to run the app

@@ -1,5 +1,5 @@
 {
-  "name": "badapp",
+  "name": "vulnerableapp",
   "private": true,
   "dependencies": {
     "@babel/preset-typescript": "^7.14.5",

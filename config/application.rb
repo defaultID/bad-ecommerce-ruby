@@ -21,7 +21,7 @@ require 'action_view/railtie'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Badapp
+module VulnerableApp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
@@ -37,7 +37,7 @@ module Badapp
     # Don't generate system test files.
     config.generators.system_tests = nil
 
-    config.hosts += ENV['BADAPP_ALLOWED_HOSTS'].split if ENV['BADAPP_ALLOWED_HOSTS'].present?
+    config.hosts += ENV['VULNERABLEAPP_ALLOWED_HOSTS'].split if ENV['VULNERABLEAPP_ALLOWED_HOSTS'].present?
 
     config.i18n.available_locales = %i[en ru]
   end
