@@ -25,12 +25,12 @@ class UserPolicy < ApplicationPolicy
     user.admin?
   end
 
-  def show_basket?
+  def show_details?
     update?
   end
 
-  def show_details?
-    update?
+  def show_basket?
+    show_details?
   end
 
   def show_picture?
@@ -39,6 +39,10 @@ class UserPolicy < ApplicationPolicy
 
   def order?
     user == record
+  end
+
+  def show_orders?
+    show_details?
   end
 
   class Scope < Scope

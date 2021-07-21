@@ -16,6 +16,8 @@ class OrdersController < ApplicationController
 
   # GET /orders or /orders.xml
   def index # rubocop:disable Metrics/AbcSize
+    authorize @user, :show_orders?
+
     @orders = policy_scope(@user.orders).order(created_at: :desc)
 
     respond_to do |format|
