@@ -6,7 +6,7 @@ module ImageRule
   class_methods do
     def image_rule(*args)
       rule(*args) do
-        key.failure 'is not an image' unless MimeMagic.by_magic(value)&.image?
+        key.failure 'is not an image' unless value.nil? || MimeMagic.by_magic(value)&.image?
       end
     end
   end
