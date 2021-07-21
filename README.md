@@ -35,6 +35,7 @@ You can use system ruby or install the required version using `rvm` or `rbenv`.
 - `simple_form` to simplify form templates (MIT License)
 - `countries` to see actual country names (MIT License)
 - `country_select` for user country input (MIT License)
+- `rails-i18n` to provide basic locale data (MIT License)
 - `pundit` to authorize actions (MIT License)
 - `mimemagic` to ensure that uploaded pictures are images (MIT License)
 - `faraday` to simplify http request code (MIT License)

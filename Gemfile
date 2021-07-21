@@ -39,6 +39,9 @@ gem 'simple_form', '~> 5.1'
 gem 'countries', '~> 4.0'
 gem 'country_select', '~> 6.0'
 
+# Locale data
+gem 'rails-i18n', '~> 6.0.0'
+
 # Authorization
 gem 'pundit', '~> 2.1'
 
