@@ -50,7 +50,7 @@ class UsersController < ApplicationController
 
     @user = User::UpdateUser.new(
       target: @user,
-      actor: nil # current_user
+      actor: current_user
     ).call(params: params.require(:user))
 
     if @user.errors.empty?

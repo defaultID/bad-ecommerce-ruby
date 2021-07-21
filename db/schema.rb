@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_14_190350) do
+ActiveRecord::Schema.define(version: 2021_07_21_205907) do
 
   create_table "baskets", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 2021_07_14_190350) do
     t.string "city"
     t.string "country_code", limit: 2
     t.boolean "admin", default: false, null: false
+    t.boolean "locked", default: false, null: false
     t.index ["api_token"], name: "index_users_on_api_token"
     t.index ["email"], name: "index_users_on_email", unique: true
   end

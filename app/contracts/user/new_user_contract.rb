@@ -2,6 +2,10 @@
 
 class User
   class NewUserContract < User::UpdateUserContract
+    # No target and actor in new user registration
+    option :actor, optional: true
+    option :target, optional: true
+
     params(User::UpdateUserContract.schema) do
       required(:email).filled(:string)
       required(:password).filled(:string)

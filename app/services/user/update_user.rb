@@ -18,7 +18,10 @@ class User
     end
 
     def validate(params)
-      User::UpdateUserContract.new.call(params)
+      User::UpdateUserContract.new(
+        actor: actor,
+        target: target
+      ).call(params)
     end
 
     def persist(result)

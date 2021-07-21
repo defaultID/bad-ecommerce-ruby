@@ -23,7 +23,11 @@ class User
     end
 
     def find_user(result)
-      User.find_by! email: result[:email], encrypted_password: Digest::MD5.hexdigest(result[:password])
+      User.find_by!(
+        email: result[:email],
+        encrypted_password: Digest::MD5.hexdigest(result[:password]),
+        locked: false
+      )
     end
 
     def persist(user)

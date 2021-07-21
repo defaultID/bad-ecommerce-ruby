@@ -20,5 +20,6 @@
     = f.input :address
     = f.input :city
     = f.input :country_code
+    = f.input :locked if policy(@user).update_locked?
 
   .actions = f.button :submit, class: 'btn-primary'

@@ -17,6 +17,10 @@ class UserPolicy < ApplicationPolicy
     user.admin? || user == record
   end
 
+  def update_locked?
+    user.admin?
+  end
+
   def destroy?
     user.admin?
   end
