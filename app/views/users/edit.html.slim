@@ -6,5 +6,8 @@ main.container
   - unless session[:return_to_order].present?
     => link_to 'Show', @user
     '|
-    =< link_to 'Back', users_path
+    - if policy(User).index?
+      =< link_to 'Back', users_path
+    - else
+      =< link_to 'Back', root_path
 

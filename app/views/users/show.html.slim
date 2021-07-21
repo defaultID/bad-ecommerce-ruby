@@ -1,4 +1,4 @@
-.container
+main.container
   h1 User profile for #{@user.display_name}
 
   .row
@@ -34,4 +34,7 @@
   - if policy(@user).show_basket?
     => link_to 'Basket', user_basket_path(@user)
     '|
-  =< link_to 'Back', users_path
+  - if policy(User).index?
+    =< link_to 'Back', users_path
+  - else
+    =< link_to 'Back', root_path
