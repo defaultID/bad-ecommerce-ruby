@@ -4,7 +4,7 @@ class OauthController < ApplicationController
   class StateMismatch < StandardError; end
 
   before_action :skip_authorization
-  before_action :check_state
+  before_action :check_state, only: [:code]
   before_action :set_oauth_client
 
   def code
