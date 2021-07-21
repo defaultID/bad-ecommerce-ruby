@@ -37,6 +37,7 @@ if User.count.zero?
     end
 
     User.find_by(email: 'admin@vulnerableapp.com').update!(admin: true)
+    User.find_by(email: 'attacker@vulnerableapp.com').update!(locked: true)
   end
 end
 
