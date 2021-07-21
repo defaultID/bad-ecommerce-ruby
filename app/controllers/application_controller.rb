@@ -31,6 +31,12 @@ class ApplicationController < ActionController::Base
     render 'error/show', status: :forbidden
   end
 
+  rescue_from ActiveRecord::RecordNotFound do |e|
+    @error = e
+
+    render 'error/show', status: :not_found
+  end
+
   private
 
   def require_login
