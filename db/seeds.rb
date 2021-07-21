@@ -8,17 +8,32 @@
 
 # Users
 if User.count.zero?
+  sample_dir = Rails.root.join 'vendor/sample_users'
+  target_dir = Rails.root.join 'public/uploads/users'
+
   User.transaction do
-    %w[
-      user@vulnerableapp.com
-      admin@vulnerableapp.com
-      attacker@vulnerableapp.com
-    ].each do |email|
-      User.create!(
-        email: email,
-        password: SecureRandom.alphanumeric(10),
-        api_token: SecureRandom.hex(16)
+    [
+      ['user', 'Basic User', 'US', 'New York', 'Christopher Street'],
+      ['admin', 'The Administrator', 'GB', 'Glasgow', 'George Square'],
+      ['attacker', 'Bad User', 'SO', 'Jamaame', 'Unnamed Street']
+    ].each do |row|
+      username, full_name, country, city, street = *row
+      picture = "#{username}.svg"
+
+      user = User.create!(
+        email: "#{username}@vulnerableapp.com",
+        password: 'password',
+        api_token: SecureRandom.hex(16),
+        full_name: full_name,
+        picture: picture,
+        country_code: country,
+        city: city,
+        address: street
       )
+
+      picture_dir = target_dir.join(user.id.to_s)
+      FileUtils.mkdir_p picture_dir
+      FileUtils.cp sample_dir.join(picture), picture_dir
     end
 
     User.find_by(email: 'admin@vulnerableapp.com').update!(admin: true)
