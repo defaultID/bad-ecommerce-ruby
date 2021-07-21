@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from Pundit::NotAuthorizedError do |e|
-    @error_message = e.message
+    @error = e
 
     render 'error/show', status: :forbidden
   end

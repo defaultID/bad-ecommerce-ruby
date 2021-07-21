@@ -12,7 +12,11 @@ Rails.application.routes.draw do
 
     resources :basket, only: %i[update destroy], controller: :baskets, as: :basket_items
 
-    resources :orders, only: %i[index create show destroy], shallow: true do
+    resources :orders, only: %i[create show destroy], shallow: true do
+      collection do
+        get :index, constraints: { format: 'html' }
+        post :index, action: :xml_index, constraints: { format: 'xml' }
+      end
       member do
         get :pay
         get :confirm_payment

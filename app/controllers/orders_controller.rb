@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   include TokenAuthentication
 
   before_action :require_login
-  before_action :set_user, only: %i[index create]
+  before_action :set_user, only: %i[index xml_index create]
   before_action :set_order, only: %i[
     show
     pay confirm_payment
@@ -12,33 +12,24 @@ class OrdersController < ApplicationController
     destroy
   ]
 
-  prepend_before_action :authenticate_by_token, only: %i[index]
+  prepend_before_action :authenticate_by_token, only: %i[xml_index]
+  skip_before_action :verify_authenticity_token, only: %i[xml_index]
 
   # GET /orders or /orders.xml
-  def index # rubocop:disable Metrics/AbcSize
+  def index
+    authorize @user, :show_orders?
+
+    @orders = policy_scope(@user.orders).order(created_at: :desc)
+  end
+
+  def xml_index
     authorize @user, :show_orders?
 
     @orders = policy_scope(@user.orders).order(created_at: :desc)
 
-    respond_to do |format|
-      format.html
-      format.xml do
-        if request.body.size.positive?
-          xml_body = Nokogiri::XML(request.body) do |config|
-            # noent actually means 'expand entities'
-            config.strict.nonoent
-          end
+    parse_request_xml if request.body.size.positive?
 
-          @date_start = xml_body.at_css('orders>dateStart').text
-          @date_end = xml_body.at_css('orders>dateEnd').text
-
-          @orders = @orders.where('created_at > ?', @date_start) if @date_start.present?
-          @orders = @orders.where('created_at < ?', @date_end) if @date_end.present?
-        end
-
-        @orders = @orders.includes(items: :product)
-      end
-    end
+    @orders = @orders.includes(items: :product)
   end
 
   # GET /orders/1
@@ -126,6 +117,19 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  def parse_request_xml
+    xml_body = Nokogiri::XML(request.body) do |config|
+      # noent actually means 'expand entities'
+      config.strict.nonoent
+    end
+
+    @date_start = xml_body.at_css('orders>dateStart').text
+    @date_end = xml_body.at_css('orders>dateEnd').text
+
+    @orders = @orders.where('created_at > ?', @date_start) if @date_start.present?
+    @orders = @orders.where('created_at < ?', @date_end) if @date_end.present?
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_user
