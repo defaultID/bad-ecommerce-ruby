@@ -18,6 +18,8 @@ class Order
           )
         end
 
+        basket_items.delete_all
+
         order
       rescue StandardError => e
         Rails.logger.error "Cannot create order:\n#{e.inspect}"
