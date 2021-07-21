@@ -2,11 +2,12 @@
 
 ## Requirements
 
-- Ruby 3.0.1
+- `Ruby` 3.0.1
 - `bundler`
 - `libmysqlclient-dev`
 - `shared-mime-info` for uploads type check
-- MySQL >= 5.7 (can be on the other host)
+- `Node.js` and `yarn`
+- `MySQL` >= 5.7 (can be on the other host)
 
 You can use system ruby or install the required version using `rvm` or `rbenv`.
 
