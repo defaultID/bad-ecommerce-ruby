@@ -82,14 +82,11 @@ class UsersController < ApplicationController
   def show_picture
     authorize @user
 
+    show_empty_image and return if params[:name].nil?
+
     file_name = File.basename params[:name]
     file_path = Rails.root.join "public/uploads/users/#{@user.id}/#{file_name}"
-
-    unless File.exist?(file_path)
-      redirect_to(
-        helpers.asset_pack_path('media/images/No_image_available.svg')
-      ) and return
-    end
+    show_empty_image and return unless File.exist?(file_path)
 
     file_type = MimeMagic.by_magic(File.open(file_path)) || 'application/octet-stream'
 
@@ -97,6 +94,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def show_empty_image
+    redirect_to helpers.asset_pack_path('media/images/No_image_available.svg')
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_user
