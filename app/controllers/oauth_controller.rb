@@ -37,7 +37,7 @@ class OauthController < ApplicationController
   end
 
   def sign_in_user(email)
-    user = User.find_by! email: email
+    user = User.find_by! email: email, locked: false
     session[:current_user] = user.id
 
     return_to = session[:return_to].presence || root_path
