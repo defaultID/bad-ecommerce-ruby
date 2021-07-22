@@ -14,8 +14,8 @@ Rails.application.routes.draw do
 
     resources :orders, only: %i[create show destroy], shallow: true do
       collection do
-        get :index, constraints: { format: 'html' }
-        post :index, action: :xml_index, constraints: { format: 'xml' }
+        get :index, constraints: ->(req) { req.format == :html }
+        post :index, action: :xml_index, constraints: ->(req) { req.format == :xml }
       end
       member do
         get :pay
