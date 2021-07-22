@@ -44,5 +44,5 @@ main.container
   - if policy(@order).confirm_receipt?
     => link_to 'Mark as received', confirm_receipt_order_path(@order), class: 'btn btn-success', method: :post
   - if policy(@order).destroy?
-    => link_to 'Delete', order_path(order), class: 'btn btn-danger', method: :delete
+    => link_to 'Delete', order_path(@order), class: 'btn btn-danger', method: :delete
   => link_to 'Back', user_orders_path(@order.user), class: 'btn btn-secondary'
