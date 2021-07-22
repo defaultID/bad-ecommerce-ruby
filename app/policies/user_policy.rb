@@ -6,7 +6,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def show?
-    true
+    user.admin? || user == record
   end
 
   def create?
