@@ -45,3 +45,4 @@ You can use system ruby or install the required version using `rvm` or `rbenv`.
 ### Frontend
 - `bootstrap` (MIT License)
 - `tom-select` for user country input (Apache License 2.0)
+- example images taken from [Openclipart](https://openclipart.org/) (CC0/Public domain)
