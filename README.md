@@ -19,6 +19,7 @@ You can use system ruby or install the required version using `rvm` or `rbenv`.
 - create MySQL user with access to `vulnerableapp_%` databases (or other name if you need)
 - confugure environment variables or `.env` file for database access (see `.env.example`)
 - run `./bin/rails db:setup` to load schema and initial data to MySQL database
+- run `./bin/rails credentials:edit` and save the file to generate required secrets
 - run `./bin/rails webpacker:compile` to compile js and css assets and prepare images for production env
 - run `./bin/rails server` or use your favorite rack application server (passenger etc) to run the app
 - use Rails console (`./bin/rails c`) to set user passwords:
