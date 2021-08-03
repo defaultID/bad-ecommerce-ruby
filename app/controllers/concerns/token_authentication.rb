@@ -8,9 +8,14 @@ module TokenAuthentication
 
     auth = JSON.parse(Base64.decode64(request.headers[:authorization]))
 
-    @current_user = User.find_by!(
-      email: auth['email'],
-      api_token: auth['token']
-    )
+    @current_user = User.find_by_sql(
+      [
+        'SELECT * FROM users WHERE email = :email AND api_token = :token',
+        {
+          email: auth['email'],
+          token: auth['token'],
+        }
+      ]
+    ).first
   end
 end
