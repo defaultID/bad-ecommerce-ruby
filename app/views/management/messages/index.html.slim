@@ -20,6 +20,6 @@ main.container
               | Anonymous
           td = management_message.name
           td = management_message.email
-          td = sanitize management_message.message
+          td == management_message.message
           td
             = link_to 'Destroy', management_message, data: { confirm: 'Are you sure?' }, method: :delete
