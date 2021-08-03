@@ -28,13 +28,13 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError do |e|
     @error = e
 
-    render 'error/show', status: :forbidden
+    render_error status: :forbidden
   end
 
   rescue_from ActiveRecord::RecordNotFound do |e|
     @error = e
 
-    render 'error/show', status: :not_found
+    render_error status: :not_found
   end
 
   private
@@ -67,5 +67,9 @@ class ApplicationController < ActionController::Base
 
   def write_settings
     cookies[:SETTINGS] = settings.to_json
+  end
+
+  def render_error(status:)
+    render 'error/show', status: status, formats: [request.format.symbol || :html]
   end
 end
