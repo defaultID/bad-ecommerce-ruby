@@ -4,7 +4,7 @@ class ContactsController < ApplicationController
   def index
     skip_policy_scope
 
-    @country = params[:country]&.upcase || 'US'
+    @country = params[:country] || 'US'
     @address = "Some place in <b>#{ISO3166::Country.new(@country)&.name}</b>"
     @management_message = Management::Message.new(
       name: current_user&.full_name,
