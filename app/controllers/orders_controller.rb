@@ -120,8 +120,7 @@ class OrdersController < ApplicationController
 
   def parse_request_xml
     xml_body = Nokogiri::XML(request.body) do |config|
-      # noent actually means 'expand entities'
-      config.strict.nonoent
+      config.strict.noent
     end
 
     @date_start = xml_body.at_css('orders>dateStart').text
