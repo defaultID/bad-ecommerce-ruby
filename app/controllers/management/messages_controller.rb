@@ -2,20 +2,15 @@
 
 module Management
   class MessagesController < ApplicationController
-    before_action :require_login, except: %i[create]
     before_action :set_management_message, only: %i[destroy]
 
     # GET /management/messages or /management/messages.json
     def index
-      authorize Management::Message
-
-      @management_messages = policy_scope(Management::Message.all).order(created_at: :desc)
+      @management_messages = Management::Message.all.order(created_at: :desc)
     end
 
     # POST /management/messages or /management/messages.json
     def create
-      authorize Management::Message
-
       @management_message = Management::Message.new(management_message_params)
       @management_message.user = current_user if logged_in?
 
@@ -28,8 +23,6 @@ module Management
 
     # DELETE /management/messages/1 or /management/messages/1.json
     def destroy
-      authorize @management_message
-
       @management_message.destroy
 
       redirect_to management_messages_url, notice: 'Message was successfully destroyed.'
