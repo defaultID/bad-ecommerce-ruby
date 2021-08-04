@@ -8,7 +8,7 @@ class WelcomeController < ApplicationController
   def set_language
     skip_authorization
 
-    settings['language'] = params[:lang] if LANGUAGES.include? params[:lang].to_sym
+    settings.language = params[:lang] if LANGUAGES.include? params[:lang].to_sym
 
     write_settings
 

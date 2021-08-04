@@ -44,6 +44,9 @@ Rails/OutputSafety:
 Rails/SkipsModelValidations:
   Enabled: false
 
+Security/MarshalLoad:
+  Enabled: false
+
 ################ Enable cops #############################
 Rails:
   Enabled: true

@@ -48,8 +48,8 @@ class ApplicationController < ActionController::Base
   end
 
   def apply_language(&action)
-    locale = if settings[:language].present? && LANGUAGES.include?(settings[:language].to_sym)
-               settings[:language]
+    locale = if settings.language.present? && LANGUAGES.include?(settings.language)
+               settings.language
              else
                LANGUAGES.first
              end
@@ -59,14 +59,14 @@ class ApplicationController < ActionController::Base
 
   def settings
     @settings ||= begin
-      JSON.parse(cookies[:SETTINGS])
-    rescue TypeError, JSON::ParserError
-      {}
-    end.with_indifferent_access
+      Marshal.load(Base64.strict_decode64(cookies[:SETTINGS]))
+    rescue TypeError, ArgumentError
+      Settings.new
+    end
   end
 
   def write_settings
-    cookies[:SETTINGS] = settings.to_json
+    cookies[:SETTINGS] = Base64.strict_encode64(Marshal.dump(settings))
   end
 
   def render_error(status:)
