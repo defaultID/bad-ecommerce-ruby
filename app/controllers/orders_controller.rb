@@ -80,7 +80,7 @@ class OrdersController < ApplicationController
   def confirm
     authorize @order
 
-    if Order::ConfirmOrder.instance.call(order: @order)
+    if @order.confirmed_status!
       redirect_to @order, notice: 'Order confirmed'
     else
       redirect_to @order, alert: 'Cannot confirm this order'

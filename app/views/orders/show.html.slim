@@ -8,7 +8,7 @@ main.container
       - if @order.paid?
         tr
           th[ scope = "row" ] Payment method
-          td = @order.payment_method.humanize
+          td = @order.payment_method
       - if @order.shipped?
         tr
           th[ scope = "row" ] Shipped at

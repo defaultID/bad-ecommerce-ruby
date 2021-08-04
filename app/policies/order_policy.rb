@@ -18,7 +18,7 @@ class OrderPolicy < ApplicationPolicy
   end
 
   def confirm?
-    user.id == record.user_id && record.paid_status?
+    user.id == record.user_id
   end
 
   def confirm_shipment?
