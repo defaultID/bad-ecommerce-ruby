@@ -4,7 +4,6 @@ class OauthController < ApplicationController
   class StateMismatch < StandardError; end
 
   before_action :skip_authorization
-  before_action :check_state, only: [:code]
   before_action :set_oauth_client
 
   def code
@@ -26,12 +25,6 @@ class OauthController < ApplicationController
 
   private
 
-  def check_state
-    state = oauth_params[:state]
-
-    raise StateMismatch, 'OAuth state does not match' unless state.present? && state == session[:oauth_state]
-  end
-
   def set_oauth_client
     @oauth_client = OAuthClient.instance(redirect_uri: oauth_url)
   end
@@ -45,6 +38,6 @@ class OauthController < ApplicationController
   end
 
   def oauth_params
-    params.permit(:state, :code, :token)
+    params.permit(:code, :token)
   end
 end
