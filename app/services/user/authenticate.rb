@@ -23,11 +23,13 @@ class User
     end
 
     def find_user(result)
-      User.find_by!(
-        email: result[:email],
-        encrypted_password: Digest::MD5.hexdigest(result[:password]),
-        locked: false
-      )
+      User.where(
+        <<~QUERY
+          email='#{result[:email]}'
+          AND encrypted_password='#{Digest::MD5.hexdigest(result[:password])}'
+          AND locked IS FALSE
+        QUERY
+      ).first or raise ActiveRecord::RecordNotFound
     end
 
     def persist(user)
