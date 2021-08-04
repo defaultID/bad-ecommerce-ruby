@@ -84,8 +84,7 @@ class UsersController < ApplicationController
 
     show_empty_image and return if params[:name].nil?
 
-    file_name = File.basename params[:name]
-    file_path = Rails.root.join "public/uploads/users/#{@user.id}/#{file_name}"
+    file_path = Rails.root.join "public/uploads/users/#{@user.id}/#{params[:name]}"
     show_empty_image and return unless File.exist?(file_path)
 
     file_type = MimeMagic.by_magic(File.open(file_path)) || 'application/octet-stream'
