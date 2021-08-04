@@ -44,6 +44,9 @@ Rails/OutputSafety:
 Rails/SkipsModelValidations:
   Enabled: false
 
+Style/SoleNestedConditional:
+  Enabled: false
+
 ################ Enable cops #############################
 Rails:
   Enabled: true
