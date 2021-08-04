@@ -6,31 +6,22 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
-    authorize User
     @users = policy_scope User
   end
 
   # GET /users/1 or /users/1.json
-  def show
-    authorize @user
-  end
+  def show; end
 
   # GET /users/new
   def new
-    authorize User
-
     @user = User.new
   end
 
   # GET /users/1/edit
-  def edit
-    authorize @user
-  end
+  def edit; end
 
   # POST /users or /users.json
   def create
-    authorize User
-
     @user = User::CreateUser.instance.call(params: params.require(:user))
 
     respond_to do |format|
@@ -46,8 +37,6 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1 or /users/1.json
   def update
-    authorize @user
-
     @user = User::UpdateUser.new(
       target: @user,
       actor: current_user
@@ -80,8 +69,6 @@ class UsersController < ApplicationController
   end
 
   def show_picture
-    authorize @user
-
     show_empty_image and return if params[:name].nil?
 
     file_name = File.basename params[:name]

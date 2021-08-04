@@ -5,10 +5,6 @@ class ApplicationController < ActionController::Base
 
   include Pundit
 
-  # rubocop:disable Lint/RedundantCopDisableDirective, Rails/LexicallyScopedActionFilter
-  after_action :verify_authorized, except: :index
-  after_action :verify_policy_scoped, only: :index
-  # rubocop:enable Lint/RedundantCopDisableDirective, Rails/LexicallyScopedActionFilter
   around_action :apply_language
 
   helper_method :current_user, :logged_in?, :logged_out?
