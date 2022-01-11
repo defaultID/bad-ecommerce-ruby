@@ -1,5 +1,15 @@
 # bad-e-commerce-Ruby
 
+The app has resembled an e-commerce website and it is the intentionally vulnerable Ruby web application ('dummy' app) to be used for teaching developers about secure coding through examples. And this application has the following vulnerabilities:
+- Cross-Site Scripting
+- SQL Injection
+- XML Entity Expansion
+- Authentication Bypass
+- Authorization Bypass (horizontal)
+- Path Traversal
+- Cross-Site Request Forgery
+- Sensitive Information Disclosure
+
 ## Requirements
 
 - `Ruby` 3.0.1
